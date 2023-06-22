@@ -1,15 +1,11 @@
-<html>
-<head>
-	<title>Add Data</title>
-</head>
-
-<body>
 <?php
-// Include the database connection file
-// error_reporting(E_ALL);
-// ini_set('display_errors', 1);
-require_once("dbConnection.php");
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
+session_start();
+
+// Include the database connection file
+require_once("dbConnection.php");
 
 if (!isset($_SESSION['username'])) {
 	header("Location: login.php");
@@ -21,6 +17,7 @@ if (isset($_POST['submit'])) {
 	$name = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['name']));
 	$age = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['age']));
 	$email = htmlspecialchars(mysqli_real_escape_string($mysqli, $_POST['email']));
+
 		
 	// Check for empty fields
 	if (empty($name) || empty($age) || empty($email)) {
@@ -41,12 +38,17 @@ if (isset($_POST['submit'])) {
 	} else { 
 		// If all the fields are filled (not empty) 
 
-		// Insert data into database
-		$result = mysqli_query($mysqli, "INSERT INTO employees (`name`, `age`, `email`) VALUES ('$name', '$age', '$email')");
-		
-		// Display success message
-		echo "<p><font color='green'>Data added successfully!</p>";
-		echo "<a href='index.php'>View Result</a>";
+			// Insert data into database
+			$result = mysqli_query($mysqli, "INSERT INTO employees (`name`, `age`, `email`) VALUES ('$name', '$age', '$email')");
+			
+			// Check for errors
+if (!$result) {
+    echo "Error: " . mysqli_error($mysqli);
+} else {
+    // Display success message and redirection
+    echo "<p><font color='green'>Data added successfully!</p>";
+    echo "<a href='index.php'>View Result</a>";
+}
 	}
 }
 ?>
