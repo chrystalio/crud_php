@@ -56,7 +56,7 @@ $stmt->close();
 			</tr>
 			<tr> 
 				<td>Age</td>
-				<td><input type="number" name="age" value="<?php echo $age; ?>"></td>
+				<td><input type="number" name="age" value="<?php echo $age; ?>" min="0"></td>
 			</tr>
 			<tr> 
 				<td>Email</td>

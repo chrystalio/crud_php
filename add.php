@@ -17,7 +17,7 @@
 			</tr>
 			<tr> 
 				<td>Age</td>
-				<td><input type="number" name="age"></td>
+				<td><input type="number" name="age" min="0"></td>
 			</tr>
 			<tr> 
 				<td>Email</td>
